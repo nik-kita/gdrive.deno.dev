@@ -1,0 +1,3 @@
+type Bucket {
+  email: String!
+}

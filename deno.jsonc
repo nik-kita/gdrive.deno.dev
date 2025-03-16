@@ -1,0 +1,33 @@
+{
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@apollo/server": "npm:@apollo/server@^4.11.3",
+    "@as-integrations/cloudflare-workers": "npm:@as-integrations/cloudflare-workers@^1.1.0",
+    "@graphql-codegen/cli": "npm:@graphql-codegen/cli@^5.0.5",
+    "@graphql-typed-document-node/core": "npm:@graphql-typed-document-node/core@^3.2.0",
+    "@std/fs": "jsr:@std/fs@^1.0.14",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "graphql": "npm:graphql@^16.10.0"
+  },
+  "exclude": [
+    "__gql__"
+  ],
+  "tasks": {
+    "install": {
+      "command": "deno install --allow-scripts"
+    },
+    "generate": {
+      "description": "Generate types basing on graphql schemas",
+      "command": "deno run --allow-all npm:@graphql-codegen/cli/graphql-codegen-esm"
+    },
+    "post-generate": {
+      "description": "Some extra steps",
+      "command": "deno run -RW scripts/post-generate.ts",
+      "dependencies": ["generate"]
+    },
+    "dev": {
+      "command": "deno run --allow-all --unstable-kv main.ts",
+      "dependencies": ["post-generate"]
+    }
+  }
+}
