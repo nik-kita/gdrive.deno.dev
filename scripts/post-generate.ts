@@ -3,6 +3,9 @@ import { join } from "@std/path";
 
 const path_to_gql_generated_types = join(Deno.cwd(), "__gql__");
 
+/**
+ * @description Add .ts extensions to relative imports
+ */
 for await (
   const dirEntry of walk(path_to_gql_generated_types, { exts: ["ts"] })
 ) {
@@ -48,3 +51,16 @@ for await (
     );
   }
 }
+
+/**
+ * @description Convert schema.gql file to string in typescript file so it can be loaded at runtime as <typeDefs>.
+ */
+const schema_content = await Deno.readTextFile(join(Deno.cwd(), "schema.gql"));
+await Deno.writeTextFile(
+  join(Deno.cwd(), "schema.ts"),
+  `\
+export const typeDefs = \`
+${schema_content.replaceAll("`", "\\`")}
+\`;
+`,
+);
