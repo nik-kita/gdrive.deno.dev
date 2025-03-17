@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy
+    environment: main
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install Node.js for ui building
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+
+      - name: Deno install
+        run: deno task install
+
+      - name: Build spa
+        run: cd spa && npm run build
+
+      - name: Build
+        run: deno task build
+
+      - name: Upload to Deno Deploy fstorage
+        uses: denoland/deployctl@v1
+        with:
+          project: fstorage
+          entrypoint: "main.ts"
+          root: ""
+          exclude: |
+            spa/node_modules
+            spa/src
+            .github
+            .vscode
+            .git
+            .gitignore
