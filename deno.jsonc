@@ -4,6 +4,8 @@
     "@apollo/server": "npm:@apollo/server@^4.11.3",
     "@as-integrations/cloudflare-workers": "npm:@as-integrations/cloudflare-workers@^1.1.0",
     "@graphql-codegen/cli": "npm:@graphql-codegen/cli@^5.0.5",
+    "@graphql-tools/mock": "npm:@graphql-tools/mock@^9.0.22",
+    "@graphql-tools/schema": "npm:@graphql-tools/schema@^10.0.23",
     "@graphql-typed-document-node/core": "npm:@graphql-typed-document-node/core@^3.2.0",
     "@std/fs": "jsr:@std/fs@^1.0.14",
     "@std/path": "jsr:@std/path@^1.0.8",
