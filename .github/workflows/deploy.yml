@@ -28,11 +28,11 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Deno install
+      - name: api install
         run: deno task install
 
       - name: spa install
-        run: cd spa && npm install && npm run build
+        run: cd spa && npm install
 
       - name: spa build
         run: cd spa && npm run build
