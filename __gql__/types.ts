@@ -14,28 +14,64 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type ApiKey = {
+  __typename?: 'ApiKey';
+  ID: Scalars['ID']['output'];
+  bucket: Bucket;
+  bucketID: Scalars['ID']['output'];
+};
+
 export type Bucket = {
   __typename?: 'Bucket';
   email: Scalars['String']['output'];
+  keys: Array<ApiKey>;
+  user: User;
+  userID: Scalars['ID']['output'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  signIn?: Maybe<Session>;
+};
+
+
+export type MutationSignInArgs = {
+  email: Scalars['String']['input'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  user_by_ID?: Maybe<User>;
+  me?: Maybe<User>;
 };
 
-
-export type QueryUser_By_IdArgs = {
-  ID: Scalars['ID']['input'];
+export type Session = {
+  ID: Scalars['ID']['output'];
+  type: SessionType;
 };
+
+export type SessionGhost = Session & {
+  __typename?: 'SessionGhost';
+  ID: Scalars['ID']['output'];
+  type: SessionType;
+};
+
+export type SessionNormal = Session & {
+  __typename?: 'SessionNormal';
+  ID: Scalars['ID']['output'];
+  activeBucket?: Maybe<Bucket>;
+  type: SessionType;
+  user: User;
+  userID: Scalars['ID']['output'];
+};
+
+export enum SessionType {
+  Ghost = 'GHOST',
+  Normal = 'NORMAL'
+}
 
 export type User = {
   __typename?: 'User';
   ID: Scalars['ID']['output'];
   buckets: Array<Bucket>;
+  sessions: Array<SessionNormal>;
 };
-
-export type GetBucketQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBucketQuery = { __typename?: 'Query', user_by_ID?: { __typename?: 'User', buckets: Array<{ __typename?: 'Bucket', email: string }> } | null };

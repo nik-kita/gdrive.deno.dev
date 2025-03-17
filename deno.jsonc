@@ -4,15 +4,30 @@
     "@apollo/server": "npm:@apollo/server@^4.11.3",
     "@as-integrations/cloudflare-workers": "npm:@as-integrations/cloudflare-workers@^1.1.0",
     "@graphql-codegen/cli": "npm:@graphql-codegen/cli@^5.0.5",
+    "@graphql-tools/mock": "npm:@graphql-tools/mock@^9.0.22",
+    "@graphql-tools/schema": "npm:@graphql-tools/schema@^10.0.23",
     "@graphql-typed-document-node/core": "npm:@graphql-typed-document-node/core@^3.2.0",
     "@std/fs": "jsr:@std/fs@^1.0.14",
+    "@std/http": "jsr:@std/http@^1.0.13",
     "@std/path": "jsr:@std/path@^1.0.8",
     "graphql": "npm:graphql@^16.10.0"
   },
   "exclude": [
-    "__gql__"
+    "__gql__",
+    "spa"
   ],
   "tasks": {
+    "gitam": {
+      "description": "Quick git commit",
+      "command": "git add -A && git commit"
+    },
+    "pr": {
+      "description": "Shortcut to create PR and merge dev branch into main",
+      "command": "git push origin dev && gh pr create --fill-verbose && gh pr merge --auto --merge",
+      "dependencies": [
+        "gitam"
+      ]
+    },
     "install": {
       "command": "deno install --allow-scripts"
     },
@@ -25,9 +40,18 @@
       "command": "deno run -RW scripts/post-generate.ts",
       "dependencies": ["generate"]
     },
-    "dev": {
+    "dev:api": {
       "command": "deno run --allow-all --unstable-kv main.ts",
       "dependencies": ["post-generate"]
+    },
+    "dev:spa": {
+      "command": "cd spa && npm run dev"
+    },
+    "dev": {
+      "dependencies": ["dev:api", "dev:spa"]
+    },
+    "build:spa": {
+      "command": "cd spa && npm run build"
     }
   }
 }

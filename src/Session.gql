@@ -1,0 +1,22 @@
+enum SessionType {
+  NORMAL
+  GHOST
+}
+
+interface Session {
+  ID: ID!
+  type: SessionType!
+}
+
+type SessionNormal implements Session {
+  ID: ID!
+  type: SessionType!
+  userID: ID!
+  user: User!
+  activeBucket: Bucket
+}
+
+type SessionGhost implements Session {
+  ID: ID!
+  type: SessionType!
+}

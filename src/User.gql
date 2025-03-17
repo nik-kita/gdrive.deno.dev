@@ -1,4 +1,5 @@
 type User {
   ID: ID!
   buckets: [Bucket!]!
+  sessions: [SessionNormal!]!
 }

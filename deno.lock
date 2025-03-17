@@ -1,26 +1,70 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@std/cli@^1.0.12": "1.0.14",
+    "jsr:@std/encoding@^1.0.7": "1.0.7",
+    "jsr:@std/fmt@^1.0.5": "1.0.6",
     "jsr:@std/fs@^1.0.14": "1.0.14",
+    "jsr:@std/html@^1.0.3": "1.0.3",
+    "jsr:@std/http@^1.0.13": "1.0.13",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
+    "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@^1.0.8": "1.0.8",
+    "jsr:@std/streams@^1.0.9": "1.0.9",
     "npm:@apollo/server@^4.11.3": "4.11.3_graphql@16.10.0",
     "npm:@as-integrations/cloudflare-workers@^1.1.0": "1.1.0_@apollo+server@4.11.3__graphql@16.10.0_graphql@16.10.0",
     "npm:@graphql-codegen/cli@*": "5.0.5_graphql@16.10.0",
     "npm:@graphql-codegen/cli@5.0.3": "5.0.3_graphql@16.10.0",
     "npm:@graphql-codegen/cli@^5.0.5": "5.0.5_graphql@16.10.0",
+    "npm:@graphql-tools/mock@^9.0.22": "9.0.22_graphql@16.10.0",
+    "npm:@graphql-tools/schema@^10.0.23": "10.0.23_graphql@16.10.0",
     "npm:@graphql-typed-document-node/core@^3.2.0": "3.2.0_graphql@16.10.0",
     "npm:codegen@*": "0.1.0",
     "npm:graphql@^16.10.0": "16.10.0"
   },
   "jsr": {
+    "@std/cli@1.0.14": {
+      "integrity": "b09ee9921cd476c0e08185ed2bfce682d45ecf4654f26c31b4aa244a2c5c024e"
+    },
+    "@std/encoding@1.0.7": {
+      "integrity": "f631247c1698fef289f2de9e2a33d571e46133b38d042905e3eac3715030a82d"
+    },
+    "@std/fmt@1.0.6": {
+      "integrity": "a2c56a69a2369876ddb3ad6a500bb6501b5bad47bb3ea16bfb0c18974d2661fc"
+    },
     "@std/fs@1.0.14": {
       "integrity": "1e84bf0b95fe08f41f1f4aea9717bbf29f45408a56ce073b0114474ce1c9fccf",
       "dependencies": [
         "jsr:@std/path"
       ]
     },
+    "@std/html@1.0.3": {
+      "integrity": "7a0ac35e050431fb49d44e61c8b8aac1ebd55937e0dc9ec6409aa4bab39a7988"
+    },
+    "@std/http@1.0.13": {
+      "integrity": "d29618b982f7ae44380111f7e5b43da59b15db64101198bb5f77100d44eb1e1e",
+      "dependencies": [
+        "jsr:@std/cli",
+        "jsr:@std/encoding",
+        "jsr:@std/fmt",
+        "jsr:@std/html",
+        "jsr:@std/media-types",
+        "jsr:@std/net",
+        "jsr:@std/path",
+        "jsr:@std/streams"
+      ]
+    },
+    "@std/media-types@1.1.0": {
+      "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
+    },
+    "@std/net@1.0.4": {
+      "integrity": "2f403b455ebbccf83d8a027d29c5a9e3a2452fea39bb2da7f2c04af09c8bc852"
+    },
     "@std/path@1.0.8": {
       "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    },
+    "@std/streams@1.0.9": {
+      "integrity": "a9d26b1988cdd7aa7b1f4b51e1c36c1557f3f252880fa6cc5b9f37078b1a5035"
     }
   },
   "npm": {
@@ -749,6 +793,16 @@
       "integrity": "sha512-NzWx/Afl/1qHT3Nm1bghGG2l4jub28AdvtG11PoUlmjcIjnFBJMv4vqL0qnxWe8A82peWo4/TkVdjJRLXwgGEw==",
       "dependencies": [
         "@graphql-tools/utils@10.8.6_graphql@16.10.0",
+        "graphql",
+        "tslib@2.8.1"
+      ]
+    },
+    "@graphql-tools/mock@9.0.22_graphql@16.10.0": {
+      "integrity": "sha512-5hU5Kx18dBTGZiCGjHgz/nUs2Eoh7t0ul8uhqUeYVUBrrle3y9rGgMsFOyx4v7hgyIbxFmzU30+8n8SC3cAcEg==",
+      "dependencies": [
+        "@graphql-tools/schema@10.0.23_graphql@16.10.0",
+        "@graphql-tools/utils@10.8.6_graphql@16.10.0",
+        "fast-json-stable-stringify",
         "graphql",
         "tslib@2.8.1"
       ]
@@ -1588,6 +1642,9 @@
         "merge2",
         "micromatch"
       ]
+    },
+    "fast-json-stable-stringify@2.1.0": {
+      "integrity": "sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw=="
     },
     "fast-querystring@1.1.2": {
       "integrity": "sha512-g6KuKWmFXc0fID8WWH0jit4g0AGBoJhCkJMb1RmbsSEUNvQ+ZC8D6CUZ+GtF8nMzSPXnhiePyyqqipzNNEnHjg==",
@@ -2759,10 +2816,13 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/fs@^1.0.14",
+      "jsr:@std/http@^1.0.13",
       "jsr:@std/path@^1.0.8",
       "npm:@apollo/server@^4.11.3",
       "npm:@as-integrations/cloudflare-workers@^1.1.0",
       "npm:@graphql-codegen/cli@^5.0.5",
+      "npm:@graphql-tools/mock@^9.0.22",
+      "npm:@graphql-tools/schema@^10.0.23",
       "npm:@graphql-typed-document-node/core@^3.2.0",
       "npm:graphql@^16.10.0"
     ]
