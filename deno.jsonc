@@ -12,7 +12,8 @@
     "graphql": "npm:graphql@^16.10.0"
   },
   "exclude": [
-    "__gql__"
+    "__gql__",
+    "spa"
   ],
   "tasks": {
     "install": {
@@ -27,9 +28,18 @@
       "command": "deno run -RW scripts/post-generate.ts",
       "dependencies": ["generate"]
     },
-    "dev": {
+    "dev:api": {
       "command": "deno run --allow-all --unstable-kv main.ts",
       "dependencies": ["post-generate"]
+    },
+    "dev:spa": {
+      "command": "cd spa && npm run dev"
+    },
+    "dev": {
+      "dependencies": ["dev:api", "dev:spa"]
+    },
+    "build:spa": {
+      "command": "cd spa && npm run build"
     }
   }
 }
