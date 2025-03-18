@@ -52,6 +52,10 @@
     },
     "build:spa": {
       "command": "cd spa && npm run build"
+    },
+    "preview:dev": {
+      "dependencies": ["build:spa"],
+      "command": "deno run dev:api"
     }
   }
 }

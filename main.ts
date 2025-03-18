@@ -41,13 +41,23 @@ Deno.serve({
   }
 
   const cached = await cache.match(req);
+
   if (cached) {
     return cached;
   }
 
-  const res = await serveDir(req, {
-    fsRoot: "./spa/dist",
+  let res = await serveDir(req, {
+    fsRoot: "spa/dist",
   });
+
+  if (res.status == 404) {
+    const index = new URL(req.url);
+    index.pathname = "index.html";
+    res = await serveDir(new Request(index, req), {
+      fsRoot: "spa/dist",
+    });
+  }
+
   await cache.put(req, res.clone());
 
   return res;
