@@ -36,7 +36,6 @@ const apollo_handler = startServerAndCreateCloudflareWorkersHandler<
 
 const cache = await caches.open("app");
 
-
 app.use(cors());
 app.use("/graphql", (c) => {
   return apollo_handler(c.req.raw, {}, {});

@@ -2,7 +2,7 @@ import "./assets/main.css";
 import { formkitPlugin } from "./plugin/formkit.plugin";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { DefaultApolloClient, apolloClient } from './plugin/apollo.plugin';
+import { apolloClient, DefaultApolloClient } from "./plugin/apollo.plugin";
 
 import App from "./App.vue";
 import router from "./router";

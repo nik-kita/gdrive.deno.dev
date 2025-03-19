@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import { gql } from 'graphql-tag';
+import { graphql } from '../gql'
 
-const example = useQuery(gql`
+const example = useQuery(graphql(`
   query ExampleQuery {
     me {
       ID
     }
   }
-`);
+`));
 
 
 </script>
@@ -17,5 +17,5 @@ const example = useQuery(gql`
   <h1>Lab</h1>
   <hr/>
   <h2>Result</h2>
-  <pre>{{ example.result }}</pre>
+  <pre>{{ example.result.value?.me?.ID }}</pre>
 </template>

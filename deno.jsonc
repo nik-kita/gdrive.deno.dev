@@ -15,8 +15,11 @@
   },
   "exclude": [
     "__gql__",
-    "spa"
+    "spa/gql"
   ],
+  "lint": {
+    "exclude": ["spa"]
+  },
   "tasks": {
     "gitam": {
       "description": "Quick git commit",
@@ -42,14 +45,18 @@
       "dependencies": ["generate"]
     },
     "dev:api": {
-      "command": "deno run --allow-all --unstable-kv main.ts",
+      "command": "deno run --allow-all --unstable-kv --watch main.ts",
       "dependencies": ["post-generate"]
+    },
+    "generate-watch:spa": {
+      "description": "Generate and check graphql string in watch mode",
+      "command": "cd spa && npm run generate:watch"
     },
     "dev:spa": {
       "command": "cd spa && npm run dev"
     },
     "dev": {
-      "dependencies": ["dev:api", "dev:spa"]
+      "dependencies": ["dev:api", "dev:spa", "generate-watch:spa"]
     },
     "build:spa": {
       "command": "cd spa && npm run build"

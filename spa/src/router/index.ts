@@ -5,8 +5,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/lab',
-      name: 'lab',
+      path: "/lab",
+      name: "lab",
       component: ViewLab,
     },
     {
