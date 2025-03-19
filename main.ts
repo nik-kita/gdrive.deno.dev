@@ -4,17 +4,21 @@ import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin
 import { startServerAndCreateCloudflareWorkersHandler } from "@as-integrations/cloudflare-workers";
 import { addMocksToSchema } from "@graphql-tools/mock";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { serveDir } from "@std/http";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { serveStatic } from "hono/deno";
 import { typeDefs } from "./schema.ts";
+
+const app = new Hono();
 
 type Env = {};
 type Context = {};
-
 
 const apollo = new ApolloServer<Context>({
   schema: addMocksToSchema({
     schema: makeExecutableSchema({ typeDefs }),
   }),
+
   introspection: true,
   plugins: [
     ApolloServerPluginLandingPageLocalDefault({ footer: false }),
@@ -32,35 +36,28 @@ const apollo_handler = startServerAndCreateCloudflareWorkersHandler<
 
 const cache = await caches.open("app");
 
-Deno.serve({
-  port: 3000,
-}, async (req) => {
 
-  const url = new URL(req.url);
-
-  if (url.pathname.startsWith("/graphql")) {
-    return apollo_handler(req, {}, {});
-  }
-
-  const cached = await cache.match(req);
+app.use(cors());
+app.use("/graphql", (c) => {
+  return apollo_handler(c.req.raw, {}, {});
+});
+app.use(async (c, next) => {
+  const cached = await cache.match(c.req.raw);
 
   if (cached) {
     return cached;
   }
 
-  let res = await serveDir(req, {
-    fsRoot: "spa/dist",
-  });
-
-  if (res.status == 404) {
-    const index = new URL(req.url);
-    index.pathname = "index.html";
-    res = await serveDir(new Request(index, req), {
-      fsRoot: "spa/dist",
-    });
-  }
-
-  await cache.put(req, res.clone());
-
-  return res;
+  await next();
+  await cache.put(c.req.raw, c.res.clone());
 });
+app.use(
+  "*",
+  serveStatic({
+    root: "spa/dist",
+  }),
+);
+
+Deno.serve({
+  port: 3000,
+}, app.fetch);

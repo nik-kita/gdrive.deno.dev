@@ -10,7 +10,8 @@
     "@std/fs": "jsr:@std/fs@^1.0.14",
     "@std/http": "jsr:@std/http@^1.0.13",
     "@std/path": "jsr:@std/path@^1.0.8",
-    "graphql": "npm:graphql@^16.10.0"
+    "graphql": "npm:graphql@^16.10.0",
+    "hono": "npm:hono@^4.7.4"
   },
   "exclude": [
     "__gql__",
