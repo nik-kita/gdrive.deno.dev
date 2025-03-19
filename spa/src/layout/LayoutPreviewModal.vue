@@ -15,7 +15,7 @@ const back = () => {
   router.go(-1);
 }
 const enter = () => {
-  router.push({ name });
+  router.replace({ name });
 }
 
 onClickOutside(modal, back);
