@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView, useRoute } from 'vue-router';
-import { useAuth } from './store/auth.store';
-
-const route = useRoute();
-const auth = useAuth();
+import { RouterLink, RouterView } from 'vue-router';
+import ComponentAuth from './components/ComponentAuth.vue';
 
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'home' }" v-show="route.name && route.name !== 'home'">Home</RouterLink>
-  <br/>
-  <RouterLink :to="{ name: '__preview__auth' }" v-show="route.name && route.name !== 'auth'">{{ auth.isLogin ? 'Logout' : 'Sign In With Google' }}</RouterLink>
+  <ComponentAuth />
+  <hr/>
+  <RouterLink :to="{ name: 'home' }">Home</RouterLink>
   <RouterView />
 </template>
   
