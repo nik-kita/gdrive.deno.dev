@@ -14,9 +14,13 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.4",
     "@formkit/vue": "^1.6.9",
     "@radix-icons/vue": "^1.0.0",
+    "@vue/apollo-composable": "^4.2.2",
     "@vueuse/core": "^13.0.0",
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"

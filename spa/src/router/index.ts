@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
+import ViewLab from "../view/ViewLab.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/lab',
+      name: 'lab',
+      component: ViewLab,
+    },
     {
       path: "/dashboard",
       name: "dashboard",

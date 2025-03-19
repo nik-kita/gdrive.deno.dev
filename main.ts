@@ -10,6 +10,7 @@ import { typeDefs } from "./schema.ts";
 type Env = {};
 type Context = {};
 
+
 const apollo = new ApolloServer<Context>({
   schema: addMocksToSchema({
     schema: makeExecutableSchema({ typeDefs }),
@@ -34,6 +35,7 @@ const cache = await caches.open("app");
 Deno.serve({
   port: 3000,
 }, async (req) => {
+
   const url = new URL(req.url);
 
   if (url.pathname.startsWith("/graphql")) {
