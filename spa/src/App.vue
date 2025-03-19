@@ -8,8 +8,9 @@ const auth = useAuth();
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'home' }" v-show="route.name !== 'home'">Home</RouterLink>
-  <RouterLink :to="{ name: '__preview__auth' }" v-show="route.name !== 'auth'">{{ auth.isLogin ? 'Logout' : 'Sign In With Google' }}</RouterLink>
+  <RouterLink :to="{ name: 'home' }" v-show="route.name && route.name !== 'home'">Home</RouterLink>
+  <br/>
+  <RouterLink :to="{ name: '__preview__auth' }" v-show="route.name && route.name !== 'auth'">{{ auth.isLogin ? 'Logout' : 'Sign In With Google' }}</RouterLink>
   <RouterView />
 </template>
   

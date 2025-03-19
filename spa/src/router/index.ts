@@ -9,14 +9,28 @@ const router = createRouter({
       component: () => import("../view/ViewDashboard.vue"),
     },
     {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('../view/ViewAuth.vue'),
+    },
+    {
       path: "/",
       name: "home",
-      components: {
-        default: () => import("../view/ViewHome.vue"),
-        login: () => import("../components/ComponentLogin.vue"),
-        logout: () => import("../components/ComponentLogout.vue"),
-      },
+      component: () => import("../view/ViewHome.vue"),
       children: [
+        {
+          path: "/auth",
+          component: () => import("../layout/LayoutPreviewModal.vue"),
+          children: [
+            {
+              path: "",
+              name: "__preview__auth",
+              components: {
+                __content: () => import("../view/ViewAuth.vue"),
+              },
+            },
+          ],
+        },
         {
           path: "/dashboard",
           component: () => import("../layout/LayoutPreviewModal.vue"),

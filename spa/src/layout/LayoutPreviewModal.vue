@@ -15,22 +15,66 @@ const back = () => {
   router.go(-1);
 }
 const enter = () => {
-  router.replace({ name })
+  router.push({ name });
 }
+
 onClickOutside(modal, back);
-onKeyStroke(['Escape'], back);
-onKeyStroke(['Enter'], enter);
+onKeyStroke(['Enter'], (ev) => {
+  ev.preventDefault();
+  enter();
+});
+onKeyStroke(['Escape'], (ev) => {
+  ev.preventDefault();
+  back();
+});
 
 </script>
 <template>
   <div class="bg">
-    <div ref="modal" class="modal" @dblclick="enter" aria-modal="true" role="dialog">
+    <div ref="modal" class="modal" @dblclick="enter">
       <Cross2Icon @click="back" class="pointer"  />
       <SizeIcon @click="enter" class="pointer" />
       <RouterView name="__content"/>
     </div>
   </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style scoped>
 .bg {
