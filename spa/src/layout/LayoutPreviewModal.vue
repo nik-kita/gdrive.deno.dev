@@ -1,14 +1,34 @@
+<script lang="ts">
+const PREVIEW_PREFIX_LEN = '__preview__'.length;
+</script>
 <script setup lang="ts">
-import { FormKit } from '@formkit/vue';
+import { Cross2Icon, SizeIcon } from '@radix-icons/vue';
+import { onClickOutside, onKeyStroke } from '@vueuse/core';
+import { useTemplateRef } from 'vue';
 import { useRouter } from 'vue-router';
 
+
+const modal = useTemplateRef<HTMLElement>('modal');
 const router = useRouter();
+const name = (router.currentRoute.value.name as string | undefined)!.slice(PREVIEW_PREFIX_LEN);
+const back = () => {
+  router.go(-1);
+}
+const enter = () => {
+  router.replace({ name })
+}
+onClickOutside(modal, back);
+onKeyStroke(['Escape'], back);
+onKeyStroke(['Enter'], enter);
+
 </script>
 <template>
-  <div class="bg"></div>
-  <div class="modal">
-    <FormKit type="button" :onclick="() => router.go(-1)">x</FormKit>
-    <RouterView name="content"/>
+  <div class="bg">
+    <div ref="modal" class="modal" @dblclick="enter" aria-modal="true" role="dialog">
+      <Cross2Icon @click="back" class="pointer"  />
+      <SizeIcon @click="enter" class="pointer" />
+      <RouterView name="__content"/>
+    </div>
   </div>
 </template>
 
@@ -24,8 +44,9 @@ const router = useRouter();
 .modal {
   background-color: white;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 2px solid black;
 }
 </style>

@@ -5,7 +5,7 @@
 <template>
   <h1>Home</h1>
   <RouterLink :to="{
-    name: 'preview-modal_dashboard'
+    name: '__preview__dashboard'
   }">Dashboard</RouterLink>
   <RouterView />
 </template>

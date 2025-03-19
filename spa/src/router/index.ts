@@ -23,9 +23,9 @@ const router = createRouter({
           children: [
             {
               path: "",
-              name: "preview-modal_dashboard",
+              name: "__preview__dashboard",
               components: {
-                content: () => import("../view/ViewDashboard.vue"),
+                __content: () => import("../view/ViewDashboard.vue"),
               },
             },
           ],
