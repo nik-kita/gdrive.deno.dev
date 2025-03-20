@@ -31,9 +31,6 @@ jobs:
       - name: api install
         run: deno task install
 
-      - name: LAB
-        run: echo ${{env.DENO_DEPLOYMENT_ID}} && echo ${{secrets.DENO_DEPLOYMENT_ID}}
-
       - name: spa install
         run: cd spa && npm install
 
