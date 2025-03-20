@@ -32,7 +32,7 @@ jobs:
         run: deno task install
 
       - name: LAB
-        run: deno eval 'console.log(Deno.env.toObject())'
+        run: echo ${{env.DENO_DEPLOYMENT_ID}} && echo ${{secrets.DENO_DEPLOYMENT_ID}}
 
       - name: spa install
         run: cd spa && npm install
