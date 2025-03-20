@@ -4,12 +4,12 @@ enum SessionType {
 }
 
 interface Session {
-  ID: ID!
+  _id: ID!
   type: SessionType!
 }
 
 type SessionNormal implements Session {
-  ID: ID!
+  _id: ID!
   type: SessionType!
   userID: ID!
   user: User!
@@ -17,6 +17,6 @@ type SessionNormal implements Session {
 }
 
 type SessionGhost implements Session {
-  ID: ID!
+  _id: ID!
   type: SessionType!
 }
