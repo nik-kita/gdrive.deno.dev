@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
-import { graphql } from '../gql'
+import { useAuth } from '../store/auth.store';
 
-const example = useQuery(graphql(`
-  query ExampleQuery {
-    me {
-      ID
-    }
-  }
-`));
-
+const auth = useAuth();
 
 </script>
 
@@ -17,5 +9,5 @@ const example = useQuery(graphql(`
   <h1>Lab</h1>
   <hr/>
   <h2>Result</h2>
-  <pre>{{ example.result.value?.me?.ID }}</pre>
+  <pre>{{  auth.me }}</pre>
 </template>

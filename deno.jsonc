@@ -21,49 +21,37 @@
     "exclude": ["spa"]
   },
   "tasks": {
-    "gitam": {
-      "description": "Quick git commit",
-      "command": "git add -A && git commit"
+    "fmt": {
+      "command": "deno fmt && cd spa && npm run lint && deno fmt"
     },
     "pr": {
       "description": "Shortcut to create PR and merge dev branch into main",
-      "command": "git push origin dev && gh pr create --fill-verbose && gh pr merge --auto --merge",
-      "dependencies": [
-        "gitam"
-      ]
+      "command": "git add -A && git commit && git push origin dev && gh pr create --fill-verbose && gh pr merge --auto --merge",
+      "dependencies": ["fmt"]
     },
     "install": {
       "command": "deno install --allow-scripts"
     },
     "generate": {
       "description": "Generate types basing on graphql schemas",
-      "command": "deno run --allow-all npm:@graphql-codegen/cli/graphql-codegen-esm"
+      "command": "deno run --allow-all npm:@graphql-codegen/cli/graphql-codegen-esm && deno run -RW scripts/post-generate.ts"
     },
-    "post-generate": {
-      "description": "Some extra steps",
-      "command": "deno run -RW scripts/post-generate.ts",
-      "dependencies": ["generate"]
+    "generate:watch:spa": {
+      "description": "Generate and check graphql string in watch mode",
+      "command": "cd spa && npm run generate:watch"
     },
     "dev:api": {
       "command": "deno run --allow-all --unstable-kv --watch main.ts",
-      "dependencies": ["post-generate"]
-    },
-    "generate-watch:spa": {
-      "description": "Generate and check graphql string in watch mode",
-      "command": "cd spa && npm run generate:watch"
+      "dependencies": ["generate"]
     },
     "dev:spa": {
       "command": "cd spa && npm run dev"
     },
     "dev": {
-      "dependencies": ["dev:api", "dev:spa", "generate-watch:spa"]
+      "dependencies": ["dev:api", "dev:spa", "generate:watch:spa"]
     },
-    "build:spa": {
+    "build": {
       "command": "cd spa && npm run build"
-    },
-    "preview:dev": {
-      "dependencies": ["build:spa"],
-      "command": "deno run dev:api"
     }
   }
 }

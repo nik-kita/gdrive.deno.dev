@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router';
 import ComponentAuth from './components/ComponentAuth.vue';
 
+
 </script>
 
 <template>

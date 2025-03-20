@@ -16,9 +16,9 @@ export type Scalars = {
 
 export type ApiKey = {
   __typename?: 'ApiKey';
-  ID: Scalars['ID']['output'];
+  _id: Scalars['ID']['output'];
   bucket: Bucket;
-  bucketID: Scalars['ID']['output'];
+  bucket_id: Scalars['ID']['output'];
 };
 
 export type Bucket = {
@@ -26,16 +26,16 @@ export type Bucket = {
   email: Scalars['String']['output'];
   keys: Array<ApiKey>;
   user: User;
-  userID: Scalars['ID']['output'];
+  user_id: Scalars['ID']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  signIn?: Maybe<Session>;
+  sign_in?: Maybe<Session>;
 };
 
 
-export type MutationSignInArgs = {
+export type MutationSign_InArgs = {
   email: Scalars['String']['input'];
 };
 
@@ -45,19 +45,19 @@ export type Query = {
 };
 
 export type Session = {
-  ID: Scalars['ID']['output'];
+  _id: Scalars['ID']['output'];
   type: SessionType;
 };
 
 export type SessionGhost = Session & {
   __typename?: 'SessionGhost';
-  ID: Scalars['ID']['output'];
+  _id: Scalars['ID']['output'];
   type: SessionType;
 };
 
 export type SessionNormal = Session & {
   __typename?: 'SessionNormal';
-  ID: Scalars['ID']['output'];
+  _id: Scalars['ID']['output'];
   activeBucket?: Maybe<Bucket>;
   type: SessionType;
   user: User;
@@ -71,7 +71,7 @@ export enum SessionType {
 
 export type User = {
   __typename?: 'User';
-  ID: Scalars['ID']['output'];
+  _id: Scalars['ID']['output'];
   buckets: Array<Bucket>;
   sessions: Array<SessionNormal>;
 };

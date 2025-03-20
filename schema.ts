@@ -5,20 +5,20 @@ schema {
 }
 
 type ApiKey {
-  ID: ID!
+  _id: ID!
   bucket: Bucket!
-  bucketID: ID!
+  bucket_id: ID!
 }
 
 type Bucket {
   email: String!
   keys: [ApiKey!]!
   user: User!
-  userID: ID!
+  user_id: ID!
 }
 
 type Mutation {
-  signIn(email: String!): Session
+  sign_in(email: String!): Session
 }
 
 type Query {
@@ -26,17 +26,17 @@ type Query {
 }
 
 interface Session {
-  ID: ID!
+  _id: ID!
   type: SessionType!
 }
 
 type SessionGhost implements Session {
-  ID: ID!
+  _id: ID!
   type: SessionType!
 }
 
 type SessionNormal implements Session {
-  ID: ID!
+  _id: ID!
   activeBucket: Bucket
   type: SessionType!
   user: User!
@@ -49,7 +49,7 @@ enum SessionType {
 }
 
 type User {
-  ID: ID!
+  _id: ID!
   buckets: [Bucket!]!
   sessions: [SessionNormal!]!
 }

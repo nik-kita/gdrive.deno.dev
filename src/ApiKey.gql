@@ -1,5 +1,5 @@
 type ApiKey {
-  ID: ID!
-  bucketID: ID!
+  _id: ID!
+  bucket_id: ID!
   bucket: Bucket!
 }
