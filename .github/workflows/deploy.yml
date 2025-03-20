@@ -31,6 +31,9 @@ jobs:
       - name: api install
         run: deno task install
 
+      - name: LAB
+        run: deno eval 'console.log(Deno.env.toObject())'
+
       - name: spa install
         run: cd spa && npm install
 
